@@ -11,3 +11,45 @@ public class SmartLockerSystem{
         for (int i = 0; i < lockers.length; i++) {
             lockers[i] = new Locker(i + 1);
         }
+     Scanner scanner = new Scanner(System.in);
+        int choice;
+
+  do {
+            // Display Menu
+            System.out.println("##################################");
+            System.out.println("Welcome to Smart Locker System");
+            System.out.println("~~~~~~~~~~ by Vikas");
+            System.out.println("##################################");
+            System.out.println("1. Store Parcel");
+            System.out.println("2. Retrieve Parcel");
+            System.out.println("3. View Locker Status");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+    
+    if(!Scanner.hasNextInt()){
+      System.out.println("Invalid input. Please enter a number.");
+                scanner.next(); // Clear invalid input
+                continue;
+            }
+
+     choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    storeParcel(scanner);
+                    break;
+                case 2:
+                    retrieveParcel(scanner);
+                    break;
+                case 3:
+                    viewStatus();
+                    break;
+                case 4:
+                    System.out.println("\nThank you for using SLM. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 1-4.");
+            }
+    
+    
