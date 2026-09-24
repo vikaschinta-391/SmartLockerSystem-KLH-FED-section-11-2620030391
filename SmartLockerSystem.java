@@ -51,5 +51,24 @@ public class SmartLockerSystem{
                 default:
                     System.out.println("Invalid choice. Please enter 1-4.");
             }
-    
-    
+    System.out.println();
+  }while (choise != 4);
+
+  Scanner.close();
+}
+  // Method to Store Parcel
+    static void storeParcel(Scanner scanner) {
+        // Find an empty locker
+        Locker availableLocker = null;
+        for (Locker locker : lockers) {
+            if (!locker.isOccupied()) {
+                availableLocker = locker;
+                break;
+            }
+        }
+      if (availableLocker == null) {
+            System.out.println("\n✗ Error: All 5 lockers are currently occupied. Please retrieve a parcel first.");
+            return;
+        }
+      
+  
