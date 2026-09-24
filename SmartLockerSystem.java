@@ -69,6 +69,79 @@ public class SmartLockerSystem{
       if (availableLocker == null) {
             System.out.println("\n✗ Error: All 5 lockers are currently occupied. Please retrieve a parcel first.");
             return;
+      }
+      System.out.println("Enter Student Name: ");
+      string studentName = sc.nextline();
+      System.out.println("Enter parcel ID: ");
+      string parcelID = sc.nextline();
+      System.out.println("Enter Deposit Hour: ");
+      int depositHour = sc.nextInt();
+      sc.nextline();
+      // validate hours 
+
+      if (depositHour < 0 || depositHour > 23) {
+            System.out.println("✗ Invalid hour. Must be between 0 and 23.");
+            return;
         }
+      // gen a random 4 digit code
+      int accessCode = 1000 + random.nextInt(9000);
+      // store parcel id in the available locker
+      availableLocker.storeParcel(studentName, parcelID, depositHour, accessCode);
+      
+      System.out.println("\n✓ Parcel stored successfully!");
+      System.out.println("Assigned to Locker #" + availableLocker.getId());
+      System.out.println("[info] Your generated access code is: " + accessCode);
+    }
+
+  // Method to Retrieve Parcel
+    static void retrieveParcel(Scanner scanner) {
+        // Check if any locker has a parcel
+        boolean hasParcel = false;
+        for (Locker locker : lockers) {
+            if (locker.isOccupied()) {
+                hasParcel = true;
+                break;
+            }
+        }
+
+      if(!hasParcel){
+        System.out.println("Error: All lockers are empty. Nothing to retrieve. ");
+        return;
+      }
+
+       System.out.print("Enter OTP: ");
+        int enteredCode = scanner.nextInt();
+        
+        System.out.print("Enter Current Hour (0-23): ");
+        int currentHour = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        // Validate hour
+        if (currentHour < 0 || currentHour > 23) {
+            System.out.println("✗ Invalid hour. Must be between 0-23.");
+            return;
+        }
+       // Search all lockers for the matching code
+        boolean found = false;
+        for (Locker locker : lockers) {
+            if (locker.isOccupied()) {
+                if (locker.getAccessCode() == enteredCode) {
+                    // Password Correct!
+                    System.out.println("\n✓ Password Correct!");
+
+                  //retrive and calculate hours
+                  int hoursStored = locker.retrieveParcel(currentHour);
+                    System.out.println("Parcel delivered to: " + locker.getStudentName());
+                    System.out.println("Parcel ID: " + locker.getParcelID());
+                    System.out.println("Stored for: " + hoursStored + " hours");
+                    System.out.println("Retrieved from Locker #" + locker.getId());
+
+                    found = true;
+                    break; 
+                }
+            }
+        }
+
+
       
   
