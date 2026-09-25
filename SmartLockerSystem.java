@@ -191,8 +191,13 @@ class Locker {
     }
 
     public int retrieveParcel(int currentHour) {
-         return hoursStored;
+    int hoursStored = currentHour - depositHour;
+    if (hoursStored < 0) {
+        hoursStored += 24;
     }
+    return hoursStored;
+}
+
 
     // Wipes the locker. Called by Main AFTER printing.
     public void clear() {
