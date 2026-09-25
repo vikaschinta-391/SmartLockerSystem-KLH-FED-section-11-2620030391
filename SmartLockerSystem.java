@@ -4,7 +4,7 @@ import java.util.Random;
 public class SmartLockerSystem{
   //array to hold 5 lockers 
   static Locker[] lockers = new Locker[5];
-  static random = new Random();
+  static random random = new Random();
 
   public static void main(String[] args) {
         // Initialize the 5 lockers
