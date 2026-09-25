@@ -141,7 +141,35 @@ public class SmartLockerSystem{
                 }
             }
         }
+      if (!found){
+        System.out.println("Incorrect OTP! Access Denied");
+        System.out.println("Parcel remains locked");
+      }
+    }
+  //method to view status 
+  static void viewStatus() {
+        System.out.println("\n========== LOCKER STATUS ==========");
+        System.out.println("Total Lockers: 5");
 
+    int occupiedCount = 0;
+        for (Locker locker : lockers) {
+            if (locker.isOccupied()) {
+                occupiedCount++;
+            }
+        }
+    System.out.println("Occupied: " + occupiedcount + "/5");
+
+    for (Locker locker : lockers) {
+            if (locker.isOccupied()) {
+                System.out.println("Locker #" + locker.getId() + ": OCCUPIED (ID: " + locker.getParcelID() + ", Owner: " + locker.getStudentName() + ")");
+            } else {
+                System.out.println("Locker #" + locker.getId() + ": EMPTY");
+            }
+        }
+    }
+}
+
+    
 
       
   
