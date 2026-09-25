@@ -168,6 +168,55 @@ public class SmartLockerSystem{
         }
     }
 }
+// Locker class to represent a single physical locker
+class Locker {
+    private int id;
+    private boolean isOccupied;
+    private String studentName;
+    private String parcelID;
+    private int depositHour;
+    private int accessCode;
+
+    public Locker(int id) {
+        this.id = id;
+        this.isOccupied = false;
+    }
+
+    public void storeParcel(String studentName, String parcelID, int depositHour, int accessCode) {
+        this.studentName = studentName;
+        this.parcelID = parcelID;
+        this.depositHour = depositHour;
+        this.accessCode = accessCode;
+        this.isOccupied = true;
+    }
+
+    public int retrieveParcel(int currentHour) {
+        if (!isOccupied) return 0;
+        
+        int hoursStored = currentHour - depositHour;
+        if (hoursStored < 0) {
+            hoursStored += 24;
+        }
+        
+        // Reset locker state
+        this.isOccupied = false;
+        this.studentName = "";
+        this.parcelID = "";
+        this.depositHour = 0;
+        this.accessCode = 0;
+        
+        return hoursStored;
+    }
+    
+    // Getters
+    public int getId() { return id; }
+    public boolean isOccupied() { return isOccupied; }
+    public String getStudentName() { return studentName; }
+    public String getParcelID() { return parcelID; }
+    public int getDepositHour() { return depositHour; }
+    public int getAccessCode() { return accessCode; }
+}
+
 
     
 
