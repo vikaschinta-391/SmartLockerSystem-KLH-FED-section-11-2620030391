@@ -124,29 +124,29 @@ public class SmartLockerSystem{
        // Search all lockers for the matching code
         boolean found = false;
         for (Locker locker : lockers) {
-            if (locker.isOccupied()) {
-                if (locker.getAccessCode() == enteredCode) {
-                    // Password Correct!
-                    System.out.println("\n✓ Password Correct!");
+            if (locker.isOccupied() && locker.getAccessCode() == enteredCode) {
+                // Password Correct!
+                System.out.println("\n✓ Password Correct!");
 
-                  //retrive and calculate hours
-                  int hoursStored = locker.retrieveParcel(currentHour);
-                    System.out.println("Parcel delivered to: " + locker.getStudentName());
-                    System.out.println("Parcel ID: " + locker.getParcelID());
-                    System.out.println("Stored for: " + hoursStored + " hours");
-                    System.out.println("Retrieved from Locker #" + locker.getId());
+                // Retrieve and calculate hours
+                int hoursStored = locker.retrieveParcel(currentHour);
+                System.out.println("Parcel delivered to: " + locker.getStudentName());
+                System.out.println("Parcel ID: " + locker.getParcelID());
+                System.out.println("Stored for: " + hoursStored + " hours");
+                System.out.println("Retrieved from Locker #" + locker.getId());
 
-                  locker.clear();
-                    found = true;
-                    break; 
-                }
+                locker.clear();
+                found = true;
+                break;
             }
-      if (!found){
-        System.out.println("Incorrect OTP! Access Denied");
-        System.out.println("Parcel remains locked");
-      }
+        }
+        if (!found) {
+            System.out.println("Incorrect OTP! Access Denied");
+            System.out.println("Parcel remains locked");
+        }
     }
-  //method to view status 
+
+    //method to view status 
   static void viewStatus() {
         System.out.println("\n========== LOCKER STATUS ==========");
         System.out.println("Total Lockers: 5");
