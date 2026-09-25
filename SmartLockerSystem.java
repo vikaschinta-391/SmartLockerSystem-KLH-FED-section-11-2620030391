@@ -12,7 +12,7 @@ public class SmartLockerSystem{
             lockers[i] = new Locker(i + 1);
         }
      Scanner scanner = new Scanner(System.in);
-        int choice;
+        int choice = 0;
 
   do {
             // Display Menu
@@ -73,7 +73,7 @@ public class SmartLockerSystem{
       System.out.println("Enter Student Name: ");
       String studentName = scanner.nextLine();
       System.out.println("Enter parcel ID: ");
-      string parcelID = scanner.nextLine();
+      String parcelID = scanner.nextLine();
       System.out.println("Enter Deposit Hour: ");
       int depositHour = scanner.nextInt();
       scanner.nextLine();
