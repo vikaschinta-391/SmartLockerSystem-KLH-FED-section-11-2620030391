@@ -4,7 +4,7 @@ import java.util.Random;
 public class SmartLockerSystem{
   //array to hold 5 lockers 
   static Locker[] lockers = new Locker[5];
-  static random random = new Random();
+  static Random random = new Random();
 
   public static void main(String[] args) {
         // Initialize the 5 lockers
@@ -26,7 +26,7 @@ public class SmartLockerSystem{
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
     
-    if(!Scanner.hasNextInt()){
+    if (!scanner.hasNextInt()) {
       System.out.println("Invalid input. Please enter a number.");
                 scanner.next(); // Clear invalid input
                 continue;
@@ -52,9 +52,9 @@ public class SmartLockerSystem{
                     System.out.println("Invalid choice. Please enter 1-4.");
             }
     System.out.println();
-  }while (choise != 4);
+  } while (choice != 4);
 
-  Scanner.close();
+  scanner.close();
 }
   // Method to Store Parcel
     static void storeParcel(Scanner scanner) {
@@ -71,12 +71,12 @@ public class SmartLockerSystem{
             return;
       }
       System.out.println("Enter Student Name: ");
-      string studentName = sc.nextline();
+      String studentName = scanner.nextLine();
       System.out.println("Enter parcel ID: ");
-      string parcelID = sc.nextline();
+      string parcelID = scanner.nextLine();
       System.out.println("Enter Deposit Hour: ");
-      int depositHour = sc.nextInt();
-      sc.nextline();
+      int depositHour = scanner.nextInt();
+      scanner.nextLine();
       // validate hours 
 
       if (depositHour < 0 || depositHour > 23) {
@@ -136,11 +136,11 @@ public class SmartLockerSystem{
                     System.out.println("Stored for: " + hoursStored + " hours");
                     System.out.println("Retrieved from Locker #" + locker.getId());
 
+                  locker.clear();
                     found = true;
                     break; 
                 }
             }
-        }
       if (!found){
         System.out.println("Incorrect OTP! Access Denied");
         System.out.println("Parcel remains locked");
@@ -157,7 +157,7 @@ public class SmartLockerSystem{
                 occupiedCount++;
             }
         }
-    System.out.println("Occupied: " + occupiedcount + "/5");
+    System.out.println("Occupied: " + occupiedCount + "/5");
 
     for (Locker locker : lockers) {
             if (locker.isOccupied()) {
@@ -191,21 +191,16 @@ class Locker {
     }
 
     public int retrieveParcel(int currentHour) {
-        if (!isOccupied) return 0;
-        
-        int hoursStored = currentHour - depositHour;
-        if (hoursStored < 0) {
-            hoursStored += 24;
-        }
-        
-        // Reset locker state
+         return hoursStored;
+    }
+
+    // Wipes the locker. Called by Main AFTER printing.
+    public void clear() {
         this.isOccupied = false;
-        this.studentName = "";
-        this.parcelID = "";
+        this.studentName = null;
+        this.parcelID = null;
         this.depositHour = 0;
         this.accessCode = 0;
-        
-        return hoursStored;
     }
     
     // Getters
@@ -216,6 +211,8 @@ class Locker {
     public int getDepositHour() { return depositHour; }
     public int getAccessCode() { return accessCode; }
 }
+
+
 
 
     
